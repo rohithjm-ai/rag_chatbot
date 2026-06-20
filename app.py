@@ -12,6 +12,8 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-
 vector = embeddings.embed_query("who at is cat?")
 db = FAISS.from_documents(chunks, embeddings)
 db.save_local("faiss_index")
+query = "What is Information Security?"
+results = db.similarity_search(query, k=3)
 
 print("PAGES : ", len(documents))
 print(documents[0].page_content[:500])
@@ -20,3 +22,6 @@ print(chunks[0].page_content)
 print("Vector Size : ", len(vector))
 print("First 10 values after Embedding : ", vector[:10])
 print("Vector Database is Created")
+for docs in results:
+    print("-" * 50)
+    print(docs.page_content)
