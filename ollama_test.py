@@ -1,6 +1,6 @@
-# this code is only for testing llama is installed or not
-from langchain_ollama import ChatOllama
+from pathlib import Path
 
-llm = ChatOllama(model="llama3")
-response = llm.invoke("What is Rag?")
-print(response.content)
+folder_path = Path(r"C:\rag_chatbot\data")
+pdf_files = folder_path.glob("*pdf")
+for pdf in pdf_files:
+    print(pdf)
